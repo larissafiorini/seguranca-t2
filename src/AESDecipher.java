@@ -17,7 +17,7 @@ public class AESDecipher {
         return DatatypeConverter.parseHexBinary(s);
     }
 
-    public String convertHexToString(String hex){
+    public static String convertHexToString(String hex){
         byte[] s = DatatypeConverter.parseHexBinary(hex);
         return new String(s);
 
@@ -35,47 +35,51 @@ public class AESDecipher {
         return new SecretKeySpec(Arrays.copyOfRange(mdbytes,0,16), "AES");
     }
 
-    public static IvParameterSpec extractIVpart(byte[] texto_cifrado){
-        int ivSize = 16;
-        // Extract IV.
-        byte[] iv = new byte[ivSize];
-        System.arraycopy(texto_cifrado, 0, iv, 0, iv.length);
+    public static IvParameterSpec extractIV(String cipher_text){
+        // hexa: byte = 2 digitos em hexa
+        int ivSize = 32;
+        String iv = cipher_text.substring(0, ivSize);
+        System.out.println("IV: "+iv);
 
-        System.out.println("IV: "+toHexString(iv));
-        IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
-        return ivParameterSpec;
+        byte[] iv_bytes= toByteArray(iv);
+
+        return new IvParameterSpec(iv_bytes);
     }
 
-    public static byte[] extractEncryptedPart(byte[] texto_cifrado)
-    {
-        int ivSize = 16;
-        // Extract encrypted part.
-        int encryptedSize = texto_cifrado.length - ivSize;
-        byte[] encryptedBytes = new byte[encryptedSize];
-        System.arraycopy(texto_cifrado, ivSize, encryptedBytes, 0, encryptedSize);
-
-        return encryptedBytes;
+    public static byte[] extractEncryptedPart(String cipher_text){
+        int ivSize = 32;
+        String encrypted_part = cipher_text.substring(ivSize);
+        System.out.println("Encrypted part: "+encrypted_part);
+        return toByteArray(encrypted_part);
     }
 
-    public static void decryptCTR(byte[] dataBytes, IvParameterSpec ivParameterSpec, byte[] encryptedBytes) throws Exception {
-        // Decrypt.
-        Cipher cipher_ctr = Cipher.getInstance("AES/CTR/NoPadding");
-        SecretKeySpec skeySpec = new SecretKeySpec(dataBytes, "AES");
+    public static void decrypt(String operation_mode, String cipher_text, String key) throws Exception{
+            String aes_op="";
+            if (operation_mode.equals("CTR"))
+                aes_op = "AES/CTR/NoPadding";
+            else if (operation_mode.equals("CBC"))
+                aes_op = "AES/CBC/PKCS5Padding";
+            else
+                System.out.println("Invalid operation mode. Please insert CTR or CBC.");
 
-        cipher_ctr.init(Cipher.DECRYPT_MODE, skeySpec, ivParameterSpec);
-        byte[] decrypted = cipher_ctr.doFinal(encryptedBytes);
 
-        String decifrada_hexadecimal = toHexString(decrypted);
+            Cipher cipher = Cipher.getInstance(aes_op);
 
-        System.out.println("\nMensagem decifrada CTR: "+ (new String(decrypted)));
-        System.out.println("\nMensagem decifrada CTR: "+ decifrada_hexadecimal);
-//        System.out.println("\nMensagem decifrada CTR: "+ AESdecipher.convertHexToString(decifrada_hexadecimal));
+            // Extract IV from cipher_text
+            IvParameterSpec ivParameterSpec = extractIV(cipher_text);
 
+            // Key
+            byte[] key_bytes= toByteArray(key);
+            SecretKeySpec skeySpec = new SecretKeySpec(key_bytes, "AES");
+
+            // Decrypt
+            cipher.init(Cipher.DECRYPT_MODE, skeySpec, ivParameterSpec);
+            // Extract encrypted part without IV and decrypt
+            byte[] decrypted_bytes = cipher.doFinal(extractEncryptedPart(cipher_text));
+
+            String plaintext = new String(decrypted_bytes);
+
+            System.out.println("\nTEXTO DECIFRADO: " + plaintext);
     }
-
-    public static void decryptCBC() throws Exception {
-        //Cipher cipherDecrypt = Cipher.getInstance("AES/CBC/PKCS5Padding");
-    }
-
 
 }
