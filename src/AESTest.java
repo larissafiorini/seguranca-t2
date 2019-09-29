@@ -80,11 +80,19 @@ class AESTest {
             String key ="36f18357be4dbd77f050515c73fcf9f2";
             String ctr_plaintext ="5468697320697320612073656e74656e636520746f20626520656e63727970746564207573696e672041455320616e6420435452206d6f64652e";
 
+            System.out.println("\nKey: "+key);
+            System.out.println("Plaintext: "+ctr_plaintext);
+
             AESCipher aes = new AESCipher();
-            aes.crypt("CTR", ctr_plaintext, key);
-            aes.crypt("CTR", ctr_plaintext, key);
-            aes.crypt("CTR", ctr_plaintext, key);
-            aes.crypt("CTR", ctr_plaintext, key);
+            String cipher_text = aes.crypt("CTR", ctr_plaintext, key);
+
+            AESDecipher aes_decipher = new AESDecipher();
+            aes_decipher.decrypt("CTR", cipher_text, key);
+
+
+//            aes.crypt("CTR", ctr_plaintext, key);
+//            aes.crypt("CTR", ctr_plaintext, key);
+//            aes.crypt("CTR", ctr_plaintext, key);
 
 
         }catch (Exception e){

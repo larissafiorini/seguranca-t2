@@ -1,5 +1,4 @@
 import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class App {
@@ -47,17 +46,17 @@ public class App {
 //        System.out.println("IV: "+(new String(ivParameterSpec.getIV())));
 //
 
-        // using CTR mode decryption
-        byte[] texto_cifrado="770b80259ec33beb2561358a9f2dc617e46218c0a53cbeca695ae45faa8952aa0e311bde9d4e01726d3184c34451".getBytes();
-        byte[] dataBytes = "36f18357be4dbd77f050515c73fcf9f2".getBytes();
-
-        IvParameterSpec ivParameterSpec =AESdecipher.extractIVpart(texto_cifrado);
-
-        byte[] encryptedBytes = AESdecipher.extractEncryptedPart(texto_cifrado);
+//        // using CTR mode decryption
+//        byte[] texto_cifrado="770b80259ec33beb2561358a9f2dc617e46218c0a53cbeca695ae45faa8952aa0e311bde9d4e01726d3184c34451".getBytes();
+//        byte[] dataBytes = "36f18357be4dbd77f050515c73fcf9f2".getBytes();
+//
+//        IvParameterSpec ivParameterSpec =AESdecipher.extractIVpart(texto_cifrado);
+//
+//        byte[] encryptedBytes = AESdecipher.extractEncryptedPart(texto_cifrado);
 
         // Decrypt.
-        AESdecipher.decryptCTR(dataBytes,ivParameterSpec,encryptedBytes);
-
+//        AESdecipher.decryptCTR(dataBytes,ivParameterSpec,encryptedBytes);
+//        AESdecipher.decrypt_ctr();
            }
 
 }
