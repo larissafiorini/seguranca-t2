@@ -6,7 +6,6 @@ class AESTest {
 
     @Test
     void tarefa1() {
-        // DECRYPT CBC
         System.out.println("Tarefa 1: Decifrar com modo de operacao CBC");
         try {
             String key = "140b41b22a29beb4061bda66b6747e14";
@@ -81,6 +80,13 @@ class AESTest {
             String key ="36f18357be4dbd77f050515c73fcf9f2";
             String ctr_plaintext ="5468697320697320612073656e74656e636520746f20626520656e63727970746564207573696e672041455320616e6420435452206d6f64652e";
 
+            AESCipher aes = new AESCipher();
+            aes.crypt("CTR", ctr_plaintext, key);
+            aes.crypt("CTR", ctr_plaintext, key);
+            aes.crypt("CTR", ctr_plaintext, key);
+            aes.crypt("CTR", ctr_plaintext, key);
+
+
         }catch (Exception e){
         }
     }
@@ -91,6 +97,8 @@ class AESTest {
         try {
             String key ="140b41b22a29beb4061bda66b6747e14";
             String cbc_plainttext ="4e657874205468757273646179206f6e65206f66207468652062657374207465616d7320696e2074686520776f726c642077696c6c2066616365206120626967206368616c6c656e676520696e20746865204c696265727461646f72657320646120416d6572696361204368616d70696f6e736869702e";
+
+            AESCipher aes = new AESCipher();
 
         }catch (Exception e){
         }

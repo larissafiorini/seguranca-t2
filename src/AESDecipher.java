@@ -7,6 +7,8 @@ import java.util.Arrays;
 
 public class AESDecipher {
 
+    public static final Integer ivSize = 32;
+
     // Funcao para converter um array de bytes para uma String em hexadecimal
     public static String toHexString(byte[] array) {
         return javax.xml.bind.DatatypeConverter.printHexBinary(array);
@@ -37,7 +39,6 @@ public class AESDecipher {
 
     public static IvParameterSpec extractIV(String cipher_text){
         // hexa: byte = 2 digitos em hexa
-        int ivSize = 32;
         String iv = cipher_text.substring(0, ivSize);
         System.out.println("IV: "+iv);
 
@@ -47,7 +48,6 @@ public class AESDecipher {
     }
 
     public static byte[] extractEncryptedPart(String cipher_text){
-        int ivSize = 32;
         String encrypted_part = cipher_text.substring(ivSize);
         System.out.println("Encrypted part: "+encrypted_part);
         return toByteArray(encrypted_part);
