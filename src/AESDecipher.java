@@ -77,8 +77,6 @@ public class AESDecipher {
             // Extract encrypted part without IV and decrypt
             byte[] decrypted_bytes = cipher.doFinal(extractEncryptedPart(cipher_text));
 
-            System.out.println("texto decifrado HEXA: "+toHexString(decrypted_bytes));
-
             String plaintext = new String(decrypted_bytes);
 
             System.out.println("\nTEXTO DECIFRADO: " + plaintext);

@@ -60,8 +60,12 @@ import java.util.Arrays;
 
             System.out.println("\nIV: "+hexa_iv);
 
+//            SecretKeySpec skeySpecCipher = getSecretKey(key);
+
+            // Key
+            SecretKeySpec skeySpecCipher = new SecretKeySpec(toByteArray(key), "AES");
+
             // Crypt
-            SecretKeySpec skeySpecCipher = getSecretKey(key);
             cipher.init(Cipher.ENCRYPT_MODE, skeySpecCipher, ivParameterSpec);
             byte[] encrypted_bytes = cipher.doFinal(plain_text.getBytes());
 
