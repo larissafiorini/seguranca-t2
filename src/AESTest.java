@@ -88,7 +88,7 @@ class AESTest {
 
             AESDecipher aes_decipher = new AESDecipher();
             aes_decipher.decrypt("CTR", cipher_text, key);
-
+            
 
 //            aes.crypt("CTR", ctr_plaintext, key);
 //            aes.crypt("CTR", ctr_plaintext, key);
@@ -107,6 +107,13 @@ class AESTest {
             String cbc_plainttext ="4e657874205468757273646179206f6e65206f66207468652062657374207465616d7320696e2074686520776f726c642077696c6c2066616365206120626967206368616c6c656e676520696e20746865204c696265727461646f72657320646120416d6572696361204368616d70696f6e736869702e";
 
             AESCipher aes = new AESCipher();
+            System.out.println("\nKey: "+key);
+            System.out.println("Plaintext: "+cbc_plainttext);
+
+            String cipher_text = aes.crypt("CBC", cbc_plainttext, key);
+
+            AESDecipher aes_decipher = new AESDecipher();
+            aes_decipher.decrypt("CBC", cipher_text, key);
 
         }catch (Exception e){
         }
