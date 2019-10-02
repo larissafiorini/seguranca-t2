@@ -2,8 +2,14 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
-import java.security.MessageDigest;
-import java.util.Arrays;
+
+/*
+ * AES - Decifragem
+ * Essa classe realiza a decifragem de um texto cifrado utilizando os modos de operação CTR ou CBC para um texto claro.
+ *
+ * Autora: Larissa Fiorini Martins
+ *
+ * */
 
 public class AESDecipher {
 
@@ -22,19 +28,6 @@ public class AESDecipher {
     public static String convertHexToString(String hex){
         byte[] s = DatatypeConverter.parseHexBinary(hex);
         return new String(s);
-
-    }
-
-    //Gera uma chave a partir de uma String.
-    //Retorna a chave secreta a partir dos 16 bytes da funcao hash aplicada sobre a String
-    public static SecretKeySpec getSecretKey(String passwd) throws Exception{
-        byte[] dataBytes = passwd.getBytes();
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-        md.update(dataBytes,0,passwd.length());
-        byte[] mdbytes=md.digest();
-
-        return new SecretKeySpec(Arrays.copyOfRange(mdbytes,0,16), "AES");
     }
 
     public static IvParameterSpec extractIV(String cipher_text){
@@ -61,7 +54,6 @@ public class AESDecipher {
                 aes_op = "AES/CBC/PKCS5Padding";
             else
                 System.out.println("Invalid operation mode. Please insert CTR or CBC.");
-
 
             Cipher cipher = Cipher.getInstance(aes_op);
 

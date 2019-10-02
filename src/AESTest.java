@@ -1,6 +1,11 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+/*
+ * Essa classe contem um teste unitario para cada tarefa de cifragem/decifragem proposta no trabalho.
+ *
+ * Autora: Larissa Fiorini Martins
+ *
+ * */
 
 class AESTest {
 
@@ -88,12 +93,6 @@ class AESTest {
 
             AESDecipher aes_decipher = new AESDecipher();
             aes_decipher.decrypt("CTR", cipher_text, key);
-            
-
-//            aes.crypt("CTR", ctr_plaintext, key);
-//            aes.crypt("CTR", ctr_plaintext, key);
-//            aes.crypt("CTR", ctr_plaintext, key);
-
 
         }catch (Exception e){
         }

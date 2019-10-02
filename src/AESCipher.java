@@ -2,9 +2,15 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
-import java.security.MessageDigest;
 import java.security.SecureRandom;
-import java.util.Arrays;
+
+/*
+* AES - Cifragem
+* Essa classe realiza a cifragem de um texto em hexadecimal utilizando os modos de operação CTR ou CBC.
+*
+* Autora: Larissa Fiorini Martins
+*
+* */
 
     public class AESCipher {
 
@@ -16,19 +22,6 @@ import java.util.Arrays;
         // Funcao para converter uma String em hexadecimal para um array de bytes
         public static byte[] toByteArray(String s) {
             return DatatypeConverter.parseHexBinary(s);
-        }
-
-        // Gera uma chave a partir de uma String.
-        // Retorna a chave secreta a partir dos 16 bytes da funcao hash aplicada sobre a string
-        public static SecretKeySpec getSecretKey(String passwd) throws Exception{
-            byte[] dataBytes = passwd.getBytes();
-
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(dataBytes, 0, passwd.length());
-            byte[] mdbytes=md.digest();
-
-            return new SecretKeySpec(Arrays.copyOfRange(mdbytes,0,16), "AES");
-
         }
 
         public static IvParameterSpec generatingRandomIV(){
@@ -60,8 +53,6 @@ import java.util.Arrays;
 
             System.out.println("\nIV: "+hexa_iv);
 
-//            SecretKeySpec skeySpecCipher = getSecretKey(key);
-
             // Key
             SecretKeySpec skeySpecCipher = new SecretKeySpec(toByteArray(key), "AES");
 
@@ -77,5 +68,4 @@ import java.util.Arrays;
             System.out.println("\nMensagem cifrada: "+ cypher_text);
             return cypher_text;
         }
-
     }
