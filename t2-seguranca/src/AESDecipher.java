@@ -5,7 +5,7 @@ import javax.xml.bind.DatatypeConverter;
 
 /*
  * AES - Decifragem
- * Essa classe realiza a decifragem de um texto cifrado utilizando os modos de operaÃ§Ã£o CTR ou CBC para um texto claro.
+ * Essa classe realiza a decifragem de um texto cifrado utilizando os modos de operação CTR ou CBC para um texto claro.
  *
  * Autora: Larissa Fiorini Martins
  *
@@ -25,17 +25,10 @@ public class AESDecipher {
         return DatatypeConverter.parseHexBinary(s);
     }
 
-    public static String convertHexToString(String hex){
-        byte[] s = DatatypeConverter.parseHexBinary(hex);
-        return new String(s);
-    }
-
     // Funcao para extrair o IV do texto cifrado
     public static IvParameterSpec extractIV(String cipher_text){
-        // hexa: byte = 2 digitos em hexa
         String iv = cipher_text.substring(0, ivSize);
-        System.out.println("IV: "+iv);
-
+        
         byte[] iv_bytes= toByteArray(iv);
 
         return new IvParameterSpec(iv_bytes);
@@ -44,7 +37,6 @@ public class AESDecipher {
     // Funcao para extrair o texto cifrado sem o IV anexado
     public static byte[] extractEncryptedPart(String cipher_text){
         String encrypted_part = cipher_text.substring(ivSize);
-        System.out.println("Encrypted part: "+encrypted_part);
         return toByteArray(encrypted_part);
     }
 
@@ -69,6 +61,7 @@ public class AESDecipher {
 
             // Decifra utilizando a chave e o IV
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, ivParameterSpec);
+            
             // Extrai parte cifrada sem o IV e decifra
             byte[] decrypted_bytes = cipher.doFinal(extractEncryptedPart(cipher_text));
 

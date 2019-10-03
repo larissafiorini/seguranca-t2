@@ -6,7 +6,7 @@ import java.security.SecureRandom;
 
 /*
 * AES - Cifragem
-* Essa classe realiza a cifragem de um texto em hexadecimal utilizando os modos de operaÃ§Ã£o CTR ou CBC.
+* Essa classe realiza a cifragem de um texto em hexadecimal utilizando os modos de operação CTR ou CBC.
 *
 * Autora: Larissa Fiorini Martins
 *
