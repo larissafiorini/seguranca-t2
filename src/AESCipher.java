@@ -24,18 +24,18 @@ import java.security.SecureRandom;
             return DatatypeConverter.parseHexBinary(s);
         }
 
+        // Funcao para calcular um IV de 16 bytes de maneira aleatoria
         public static IvParameterSpec generatingRandomIV(){
-            // Generating IV of 16 bytes
             int ivSize = 16;
             byte[] iv = new byte[ivSize];
             SecureRandom random = new SecureRandom();
             random.nextBytes(iv);
             IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);
 
-
             return ivParameterSpec;
         }
 
+        // Funcao para cifrar usando AES com os modos de operacao CTR e CBC
         public static String crypt(String operation_mode, String plain_text, String key) throws Exception{
             String aes_op="";
             if (operation_mode.equals("CTR"))
@@ -43,26 +43,22 @@ import java.security.SecureRandom;
             else if (operation_mode.equals("CBC"))
                 aes_op = "AES/CBC/PKCS5Padding";
             else
-                System.out.println("Invalid operation mode. Please insert CTR or CBC.");
+                System.out.println("Modo de operacao invalido. Por favor insira 'CTR' ou 'CBC'.");
 
             Cipher cipher = Cipher.getInstance(aes_op);
 
-            // Generating IV
+            // Gera IV
             IvParameterSpec ivParameterSpec =generatingRandomIV();
             String hexa_iv = toHexString(ivParameterSpec.getIV());
 
-            System.out.println("\nIV: "+hexa_iv);
-
-            // Key
+            // Chave
             SecretKeySpec skeySpecCipher = new SecretKeySpec(toByteArray(key), "AES");
 
-            // Crypt
+            // Cifra utilizando a chave e o IV
             cipher.init(Cipher.ENCRYPT_MODE, skeySpecCipher, ivParameterSpec);
             byte[] encrypted_bytes = cipher.doFinal(plain_text.getBytes());
 
-            System.out.println("Encrypted text: " + toHexString(encrypted_bytes));
-
-            // Join IV in hexadecimal with encrypted text in hexadecimal
+            // Anexa o IV em hexadecimal gerado na frente do texto cifrado em hexadecimal
             String cypher_text = String.join("", hexa_iv, toHexString(encrypted_bytes));
 
             System.out.println("\nMensagem cifrada: "+ cypher_text);

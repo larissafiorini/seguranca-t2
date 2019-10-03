@@ -30,6 +30,7 @@ public class AESDecipher {
         return new String(s);
     }
 
+    // Funcao para extrair o IV do texto cifrado
     public static IvParameterSpec extractIV(String cipher_text){
         // hexa: byte = 2 digitos em hexa
         String iv = cipher_text.substring(0, ivSize);
@@ -40,12 +41,14 @@ public class AESDecipher {
         return new IvParameterSpec(iv_bytes);
     }
 
+    // Funcao para extrair o texto cifrado sem o IV anexado
     public static byte[] extractEncryptedPart(String cipher_text){
         String encrypted_part = cipher_text.substring(ivSize);
         System.out.println("Encrypted part: "+encrypted_part);
         return toByteArray(encrypted_part);
     }
 
+    // Funcao para decifrar usando AES com os modos de operacao CTR e CBC
     public static void decrypt(String operation_mode, String cipher_text, String key) throws Exception{
             String aes_op="";
             if (operation_mode.equals("CTR"))
@@ -57,16 +60,16 @@ public class AESDecipher {
 
             Cipher cipher = Cipher.getInstance(aes_op);
 
-            // Extract IV from cipher_text
+            // Extrai IV do texto cifrado
             IvParameterSpec ivParameterSpec = extractIV(cipher_text);
 
-            // Key
+            // Chave
             byte[] key_bytes= toByteArray(key);
             SecretKeySpec skeySpec = new SecretKeySpec(key_bytes, "AES");
 
-            // Decrypt
+            // Decifra utilizando a chave e o IV
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, ivParameterSpec);
-            // Extract encrypted part without IV and decrypt
+            // Extrai parte cifrada sem o IV e decifra
             byte[] decrypted_bytes = cipher.doFinal(extractEncryptedPart(cipher_text));
 
             String plaintext = new String(decrypted_bytes);

@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1f792d13-5083-4273-b9e2-13882c736e3c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/seguranca-t2/AESCipher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/seguranca-t2/AESCipher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/seguranca-t2/AESDecipher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/seguranca-t2/AESDecipher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/seguranca-t2/AESTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/seguranca-t2/AESTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/seguranca-t2/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/seguranca-t2/App.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AESCipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AESCipher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AESDecipher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AESDecipher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AESTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AESTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
